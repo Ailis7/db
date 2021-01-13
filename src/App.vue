@@ -60,11 +60,6 @@ html {
   font-size: 40px;
 }
 
-@media screen and (max-width: 1281px) {
-  html {
-    font-size: 20px;
-  }
-}
 .col[class],
 .row[class],
 .h1[class],
@@ -118,7 +113,7 @@ small.text-uppercase.col {
 }
 
 small.text-uppercase.col.text-center {
-  left: 3rem;
+  left: 2.75rem;
 }
 
 .decrease {
@@ -139,5 +134,14 @@ small.text-uppercase.col.text-center {
 .increase2[class] {
   font-weight: 500;
   margin-bottom: 0;
+}
+
+@media screen and (max-width: 1281px) {
+  html {
+    font-size: 26px;
+  }
+  small.text-uppercase.col.text-center {
+    left: 2.9rem;
+  }
 }
 </style>

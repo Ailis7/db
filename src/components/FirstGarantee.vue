@@ -2,9 +2,10 @@
   <div id="FirstGarantee">
     <div
       class="container-fluid"
-      style="background-color: #f5f5f5; height: 100vh"
+      style="background-color: #f5f5f5;"
+      ref="mainContainer"
     >
-    
+      <!-- <button style="height: 100px; width: 100px">{{}}</button> -->
       <div
         class="row mb-2 pt-3 pl-3 pr-3 pb-2"
         style="background-color: #FFFFFF"
@@ -12,12 +13,12 @@
         <div class="col-1 p-0" style="min-width: 5em">
           <img class="logo" src="../svg/logo_bg.svg" style="width: 100%" />
         </div>
-        <div class="col-8 pl-3">
+        <div class="col pl-3">
           <div class="h1" style="line-height: 0.6; ">Банковские гарантии</div>
         </div>
-        <div class="col d-flex justify-content-end">
-          <a class="prev-button mr-1" @click='arrowPrev'></a>
-          <a class="next-button" @click='arrowNext'> </a>
+        <div class="col-3 col-sm-2 d-flex justify-content-end">
+          <a class="prev-button mr-1" @click="arrowPrev"></a>
+          <a class="next-button" @click="arrowNext"> </a>
         </div>
       </div>
 
@@ -26,14 +27,15 @@
           class="col-8 mr-2 pb-2 d-flex flex-column justify-content-between"
           style="background-color: #FFFFFF; border-radius: 20px;"
         >
+          <resize-observer @notify="handleResize" />
           <div class="row pt-1">
             <div class="col h5 m-0">Комиссия</div>
           </div>
 
           <div class="row">
-            <div class="col-4 my-auto text-uppercase">Сегодня</div>
+            <div class="col-3 my-auto text-uppercase">Сегодня</div>
             <div class="col bigDigits mb-2 d-flex  justify-content-end">
-              {{ comissions[0].value.toLocaleString("ru-RU") }} ₽
+              {{ comissions[0].value.toLocaleString('ru-RU') }} ₽
             </div>
           </div>
           <div class="row">
@@ -49,7 +51,7 @@
             <div class="row text-uppercase">
               <div class="col-4 my-auto ">{{ comission.label }}</div>
               <div class="col h2 d-flex justify-content-end  my-auto">
-                {{ comission.value.toLocaleString("ru-RU") }} ₽
+                {{ comission.value.toLocaleString('ru-RU') }} ₽
               </div>
             </div>
             <div class="row">
@@ -61,9 +63,10 @@
         </div>
 
         <div
-          class="col pb-2 d-flex flex-column justify-content-between"
+          class="col pb-2 d-flex flex-column justify-content-between radiusBorder"
           style="background-color: #FFFFFF; border-radius: 20px; padding-left: 2.25rem"
         >
+          <resize-observer @notify="handleResize2" />
           <div class="row pt-1">
             <div class="row">
               <div class="col h5 mb-1">
@@ -93,7 +96,7 @@
           <div class="row">
             <div class="row">
               <div class="col h5">
-                Новые клиенты
+                Новые сделки
               </div>
             </div>
           </div>
@@ -149,48 +152,54 @@
 // import { BCard } from "bootstrap-vue";
 
 export default {
-  name: "FirstGarantee",
+  name: 'FirstGarantee',
   data() {
     return {
       comissions: [
-        { label: "Сегодня", value: 1098754 },
-        { label: "Вчера", value: 257272 },
-        { label: "Неделю назад", value: 1402503 },
-        { label: "Год назад", value: 2974769 }
+        { label: 'Сегодня', value: 1098754 },
+        { label: 'Вчера', value: 257272 },
+        { label: 'Неделю назад', value: 1402503 },
+        { label: 'Год назад', value: 2974769 },
       ],
       sdelki: [
-        { value: 70, avg_cheque: "" },
-        { value: 2, avg_cheque: "" }
+        { value: 70, avg_cheque: '' },
+        { value: 2, avg_cheque: '' },
       ],
-      rest: [{ value: 2 }, { value: 10 }]
+      rest: [{ value: 2 }, { value: 10 }],
+      sumHeight: [],
+      headHeight: 310,
     };
   },
   methods: {
-    arrowPrev() { 
-      this.$emit('arrowClick', 'prev')
+    arrowPrev() {
+      this.$emit('arrowClick', 'prev');
     },
-    arrowNext() { 
-      this.$emit('arrowClick', 'next')
+    arrowNext() {
+      this.$emit('arrowClick', 'next');
     },
-    getPercent(array, value, key) {
-      var max = 0;
-      array.forEach(item => {
-        max = item[key] > max ? item[key] : max;
-      });
-      console.log((value * 100) / max + "%");
-      return (value * 100) / max + +"%";
-    }
+    handleResize: function({ height }) {
+      this.sumHeight[0] = height;
+      this.$emit('handleResize', (this.headHeight + this.sumHeight[0] + this.sumHeight[1]));
+    },
+    handleResize2: function({ height }) {
+      this.sumHeight[1] = height;
+      this.$emit('handleResize', (this.headHeight + this.sumHeight[0] + this.sumHeight[1]));
+    },
   },
   computed: {
     comissionsWithoutFirst() {
-      return this.comissions.filter(e => this.comissions.indexOf(e) > 0);
-    }
-  }
+      return this.comissions.filter((e) => this.comissions.indexOf(e) > 0);
+    },
+  },
 };
 </script>
 
 <style>
 div.col.progress {
   border-radius: 20px;
+}
+
+.second-column {
+  display: grid;
 }
 </style>

@@ -9,11 +9,13 @@
     "deploy": "node scripts/gh-pages-deploy.js"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.1",
+    "core-js": "^3.6.5",
     "element-ui": "^2.14.1",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue-resize": "^1.0.0",
+    "vue-slick-carousel": "^1.0.6"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

@@ -10,9 +10,10 @@
       indicator-position="none"
       arrow="never"
       ref="carousel"
+      :height="carouselHeight"
     >
       <el-carousel-item>
-        <first-garantee @arrowClick="arrowClick"></first-garantee>
+        <first-garantee @arrowClick="arrowClick" @handleResize="handleResize"></first-garantee>
       </el-carousel-item>
       <el-carousel-item>
         <second-garantee @arrowClick="arrowClick"></second-garantee>
@@ -22,8 +23,10 @@
 </template>
 
 <script>
+import 'vue-resize/dist/vue-resize.css'
 import FirstGarantee from './components/FirstGarantee';
 import SecondGarantee from './components/SecondGarantee';
+
 
 export default {
   name: 'dashboard',
@@ -32,7 +35,9 @@ export default {
     SecondGarantee,
   },
   data() {
-    return {};
+    return {
+      carouselHeight: '100vh',
+    };
   },
   methods: {
     arrowClick(direction) {
@@ -40,7 +45,12 @@ export default {
         ? this.$refs.carousel.prev()
         : this.$refs.carousel.next();
     },
+    handleResize(test) {
+      this.carouselHeight = test + 'px'
+      console.log(test);
+    }
   },
+
   computed: {},
 };
 </script>
@@ -48,16 +58,13 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap');
 
-.el-carousel,
-.el-carousel__container[class] {
-  height: 100vh;
-}
 html body {
   font-family: Roboto;
+  
 }
 
 html {
-  font-size: 40px;
+  font-size: calc( (100vw - 1280px)/(1920 - 1280) * (40 - 28) + 28px);
 }
 
 .col[class],
@@ -136,7 +143,7 @@ small.text-uppercase.col.text-center {
   margin-bottom: 0;
 }
 
-@media screen and (max-width: 1281px) {
+/* @media screen and (max-width: 1281px) {
   html {
     font-size: 26px;
   }
@@ -144,4 +151,20 @@ small.text-uppercase.col.text-center {
     left: 2.9rem;
   }
 }
+@media screen and (max-width: 1481px) {
+  html {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 1700px) {
+  html {
+    font-size: 32px;
+  }
+}
+
+
+@media screen and (max-width: 1700px) {
+  
+} */
 </style>

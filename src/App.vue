@@ -13,7 +13,10 @@
       :height="carouselHeight"
     >
       <el-carousel-item>
-        <first-garantee @arrowClick="arrowClick" @handleResize="handleResize"></first-garantee>
+        <first-garantee
+          @arrowClick="arrowClick"
+          @handleResize="handleResize"
+        ></first-garantee>
       </el-carousel-item>
       <el-carousel-item>
         <second-garantee @arrowClick="arrowClick"></second-garantee>
@@ -23,10 +26,8 @@
 </template>
 
 <script>
-import 'vue-resize/dist/vue-resize.css'
 import FirstGarantee from './components/FirstGarantee';
 import SecondGarantee from './components/SecondGarantee';
-
 
 export default {
   name: 'dashboard',
@@ -46,25 +47,24 @@ export default {
         : this.$refs.carousel.next();
     },
     handleResize(test) {
-      this.carouselHeight = test + 'px'
+      // this.carouselHeight = test + 'px'
       console.log(test);
-    }
+    },
   },
 
   computed: {},
 };
 </script>
 
-<style>
-@import url('https://fonts.googleapis.com/css?family=Roboto:wght@100;300;400;500;700;900&amp;display=swap');
+<style lang='scss'>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
 
 html body {
   font-family: Roboto;
-  
 }
 
 html {
-  font-size: calc( (100vw - 1280px)/(1920 - 1280) * (40 - 28) + 28px);
+  font-size: calc((100vw - 1280px) / (1920 - 1280) * (40 - 28) + 28px);
 }
 
 .col[class],
@@ -76,7 +76,7 @@ html {
 .h5[class],
 .h6[class],
 small[class] {
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .prev-button,
@@ -87,13 +87,17 @@ small[class] {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   opacity: 0.5;
   background-size: 2em 2em;
+  &:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
 }
 
-.prev-button:hover,
-.next-button:hover {
-  opacity: 1;
-  cursor: pointer;
-}
+// .prev-button:hover,
+// .next-button:hover {
+//   opacity: 1;
+//   cursor: pointer;
+// }
 
 .prev-button {
   background-image: url('./svg/arrow-left.svg');
@@ -102,9 +106,12 @@ small[class] {
   background-image: url('./svg/arrow-right.svg');
 }
 
-.bigDigits {
+.bigDigits[class] {
   font-size: 3em;
   line-height: 1;
+  word-spacing: -0.5rem;
+  padding: 0px;
+  /* margin: auto; */
 }
 .progress-bar[class] {
   border-radius: 20px;
@@ -117,6 +124,7 @@ small.text-uppercase {
 
 small.text-uppercase.col {
   position: absolute;
+  padding: 0;
 }
 
 small.text-uppercase.col.text-center {
@@ -139,8 +147,8 @@ small.text-uppercase.col.text-center {
 .decrease[class],
 .increase[class],
 .increase2[class] {
-  font-weight: 500;
   margin-bottom: 0;
+  padding: 0;
 }
 
 /* @media screen and (max-width: 1281px) {

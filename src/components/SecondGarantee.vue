@@ -3,17 +3,17 @@
     <div class="container-fluid" style="background-color: #f5f5f5; height: 100vh">
       <div
         class="row mb-2 pt-3 pl-3 pr-3 pb-2"
-        style="background-color: #FFFFFF"
+        style="background-color: #ffffff"
       >
         <div class="col-1 p-0" style="min-width: 5em">
           <img class="logo" src="../svg/logo_bg.svg" style="width: 100%" />
         </div>
-        <div class="col-8 pl-3">
-          <div class="h1" style="line-height: 0.6; ">Банковские гарантии</div>
+        <div class="col pl-3">
+          <div class="h1" style="line-height: 0.6">Банковские гарантии</div>
         </div>
-        <div class="col d-flex justify-content-end">
-          <a class="prev-button mr-1" @click='arrowPrev'> </a>
-          <a class="next-button" @click='arrowNext'> </a>
+        <div class="col-3 col-sm-2 d-flex justify-content-end">
+          <a class="prev-button mr-1" @click="arrowPrev"></a>
+          <a class="next-button" @click="arrowNext"> </a>
         </div>
       </div>
       <div class="m-1 d-flex flex-column justify-content-between" style="height: calc(100vh - 2.5em - 2em)">
@@ -22,7 +22,7 @@
           <div class="col">
             На текущий день
           </div>
-          <div class="col p-0">
+          <div class="col">
             Динамика месяца
           </div>
           <div class="col">
@@ -32,13 +32,13 @@
 
         <div class="row white pt-2 flex-fill">
           <div
-            class="col my-auto h5 text-uppercase"
+            class="col cell h5 text-uppercase"
             style="font-weight: normal"
           >
             Объем <strong>портфеля</strong>
           </div>
 
-          <div class="col my-auto num">
+          <div class="col cell">
             <div class="row">
               <div class="col bigDigits">17.8 <span class="h5">млрд</span></div>
               <!-- не нашёл переменной -->
@@ -59,7 +59,7 @@
             </div>
           </div>
 
-          <div class="col my-auto num">
+          <div class="col cell">
             <div class="row">
               <div class="col bigDigits">1.1 <span class="h5">млрд</span></div>
               <!-- не нашёл переменной -->
@@ -79,7 +79,7 @@
               <small class="text-uppercase col text-center">за год</small>
             </div>
           </div>
-          <div class="col my-auto num">
+          <div class="col cell">
             <div class="row">
               <div class="col bigDigits">2.9%</div>
               <!-- не нашёл переменной -->
@@ -109,13 +109,13 @@
 
         <div class="row white pt-2 flex-fill mt-2 mb-2">
           <div
-            class="col my-auto h5 text-uppercase"
+            class="col cell h5 text-uppercase"
             style="font-weight: normal;"
           >
             Количество <strong>сделок</strong>
           </div>
 
-          <div class="col my-auto num">
+          <div class="col cell">
             <div class="row">
               <div class="col bigDigits">18.1 <span class="h5">млрд</span></div>
               <!-- не нашёл переменной -->
@@ -136,7 +136,7 @@
             </div>
           </div>
 
-          <div class="col my-auto num">
+          <div class="col cell">
             <div class="row">
               <div class="col bigDigits">2.3 <span class="h5">тыс</span></div>
               <!-- не нашёл переменной -->
@@ -156,7 +156,7 @@
               <small class="text-uppercase col text-center">за год</small>
             </div>
           </div>
-          <div class="col my-auto num">
+          <div class="col cell">
             <div class="row">
               <div class="col bigDigits">15.6%</div>
               <!-- не нашёл переменной -->
@@ -186,13 +186,13 @@
 
         <div class="row white pt-2 pb-2 mb-1 flex-fill">
           <div
-            class="col my-auto h5 text-uppercase"
+            class="col cell h5 text-uppercase"
             style="font-weight: normal;"
           >
             Сделки по <strong>новым клиентам</strong>
           </div>
-          <div class="col bigDigits my-auto">14.4 <span class="h5">тыс</span></div>
-          <div class="col bigDigits my-auto">0.7</div>
+          <div class="col bigDigits cell">14.4 <span class="h5">тыс</span></div>
+          <div class="col bigDigits cell">0.7</div>
           <div class="col"></div>
         </div>
 
@@ -326,7 +326,16 @@ export default {
   border-radius: 20px;
 }
 
-div.col.my-auto.num {
+/* div.col.my-auto.num {
   padding-bottom: 2rem;
+} */
+.cell[class] {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  min-height: 2rem;
+  /* margin-top: auto;
+  margin-bottom: auto; */
+  /* display: -ms-grid; */
 }
 </style>

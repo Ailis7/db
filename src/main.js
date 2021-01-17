@@ -1,15 +1,17 @@
-import Vue from 'vue'
-import { ResizeObserver } from 'vue-resize'
-import App from './App.vue'
+import 'core-js/stable';
+import Vue from 'vue';
+// import '@/plugins/vuetify';
+
+import App from './App.vue';
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
 
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
-Vue.component('resize-observer', ResizeObserver);
+
 Vue.use(ElementUI);
 
 // Install BootstrapVue
@@ -19,5 +21,5 @@ Vue.use(IconsPlugin);
 
 new Vue({
   el: '#app',
-  render: h => h(App)
-})
+  render: (h) => h(App),
+});

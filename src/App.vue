@@ -16,6 +16,7 @@
         <first-garantee
           @arrowClick="arrowClick"
           @handleResize="handleResize"
+          ref="hey"
         ></first-garantee>
       </el-carousel-item>
       <el-carousel-item>
@@ -42,13 +43,17 @@ export default {
   },
   methods: {
     arrowClick(direction) {
-      direction === 'prev'
-        ? this.$refs.carousel.prev()
-        : this.$refs.carousel.next();
+      this.$refs.hey.handleResizeTest();
+      console.log(document.querySelectorAll('.el-carousel__item'));
+      if (direction === 'prev') {
+        this.$refs.carousel.prev()
+      } else {
+        this.$refs.carousel.next();
+      }
     },
-    handleResize(test) {
-      // this.carouselHeight = test + 'px'
-      console.log(test);
+    handleResize(height) {
+      this.carouselHeight = height;
+      // console.log(height);
     },
   },
 
@@ -63,9 +68,21 @@ html body {
   font-family: Roboto;
 }
 
-html {
-  font-size: calc((100vw - 1280px) / (1920 - 1280) * (40 - 28) + 28px);
+@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $b: $f-min - $k * $v-min;
+
+  $b: $b * 1px;
+
+  @return calc( #{$k} * 100vw + #{$b} );
 }
+html {
+  font-size: calcFluidFontSize(28, 40, 1280, 1920);
+}
+
+// html {
+//   font-size: calc((100vw - 1280px) / (1920 - 1280) * (40 - 28) + 28px);
+// }
 
 .col[class],
 .row[class],
@@ -128,7 +145,7 @@ small.text-uppercase.col {
 }
 
 small.text-uppercase.col.text-center {
-  left: 2.75rem;
+  left: 2.4rem;
 }
 
 .decrease {

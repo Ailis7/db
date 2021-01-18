@@ -1,6 +1,9 @@
 <template>
   <div id="SecondGarantee">
-    <div class="container-fluid" style="background-color: #f5f5f5; height: 100vh">
+    <div
+      class="container-fluid"
+      style="background-color: #f5f5f5; height: 100vh"
+    >
       <div
         class="row mb-2 pt-3 pl-3 pr-3 pb-2"
         style="background-color: #ffffff"
@@ -16,7 +19,10 @@
           <a class="next-button" @click="arrowNext"> </a>
         </div>
       </div>
-      <div class="m-1 d-flex flex-column justify-content-between" style="height: calc(100vh - 2.5em - 2em)">
+      <div
+        class="m-1 d-flex flex-column justify-content-between"
+        style="height: calc(100vh - 2.5em - 2em)"
+      >
         <div class="row h5">
           <div class="col"></div>
           <div class="col">
@@ -31,10 +37,7 @@
         </div>
 
         <div class="row white pt-2 flex-fill">
-          <div
-            class="col cell h5 text-uppercase"
-            style="font-weight: normal"
-          >
+          <div class="col cell h5 text-uppercase" style="font-weight: normal">
             Объем <strong>портфеля</strong>
           </div>
 
@@ -101,17 +104,14 @@
               >
               <small class="text-uppercase col text-center"
                 >рынок
-                <p class="m-0" >за год</p></small
+                <p class="m-0">за год</p></small
               >
             </div>
           </div>
         </div>
 
         <div class="row white pt-2 flex-fill mt-2 mb-2">
-          <div
-            class="col cell h5 text-uppercase"
-            style="font-weight: normal;"
-          >
+          <div class="col cell h5 text-uppercase" style="font-weight: normal;">
             Количество <strong>сделок</strong>
           </div>
 
@@ -185,14 +185,23 @@
         </div>
 
         <div class="row white pt-2 pb-2 mb-1 flex-fill">
-          <div
-            class="col cell h5 text-uppercase"
-            style="font-weight: normal;"
-          >
+          <div class="col cell h5 text-uppercase" style="font-weight: normal;">
             Сделки по <strong>новым клиентам</strong>
           </div>
-          <div class="col bigDigits cell">14.4 <span class="h5">тыс</span></div>
-          <div class="col bigDigits cell">0.7</div>
+          <div class="col cell">
+            <div class="row">
+              <div class="col bigDigits">
+                14.4 <span class="h5" style="display: inline;">тыс</span>
+              </div>
+            </div>
+          </div>
+          <div class="col cell">
+            <div class="row">
+              <div class="col bigDigits">
+                0.7 <span class="h5" style="display: inline;"></span>
+              </div>
+            </div>
+          </div>
           <div class="col"></div>
         </div>
 
@@ -280,43 +289,43 @@
 // import { BCard } from "bootstrap-vue";
 
 export default {
-  name: "SecondGarantee",
+  name: 'SecondGarantee',
   data() {
     return {
       comissions: [
-        { label: "Сегодня", value: 1098754 },
-        { label: "Вчера", value: 257272 },
-        { label: "Неделю назад", value: 1402503 },
-        { label: "Год назад", value: 2974769 }
+        { label: 'Сегодня', value: 1098754 },
+        { label: 'Вчера', value: 257272 },
+        { label: 'Неделю назад', value: 1402503 },
+        { label: 'Год назад', value: 2974769 },
       ],
       sdelki: [
-        { value: 70, avg_cheque: "" },
-        { value: 2, avg_cheque: "" }
+        { value: 70, avg_cheque: '' },
+        { value: 2, avg_cheque: '' },
       ],
-      rest: [{ value: 2 }, { value: 10 }]
+      rest: [{ value: 2 }, { value: 10 }],
     };
   },
   methods: {
-     arrowPrev() { 
-      this.$emit('arrowClick', 'prev')
+    arrowPrev() {
+      this.$emit('arrowClick', {id: 1, direction: 'prev'});
     },
-    arrowNext() { 
-      this.$emit('arrowClick', 'next')
+    arrowNext() {
+      this.$emit('arrowClick', {id: 1, direction: 'next'});
     },
     getPercent(array, value, key) {
       var max = 0;
-      array.forEach(item => {
+      array.forEach((item) => {
         max = item[key] > max ? item[key] : max;
       });
-      console.log((value * 100) / max + "%");
-      return (value * 100) / max + +"%";
-    }
+      console.log((value * 100) / max + '%');
+      return (value * 100) / max + +'%';
+    },
   },
   computed: {
     comissionsWithoutFirst() {
-      return this.comissions.filter(e => this.comissions.indexOf(e) > 0);
-    }
-  }
+      return this.comissions.filter((e) => this.comissions.indexOf(e) > 0);
+    },
+  },
 };
 </script>
 
@@ -331,9 +340,12 @@ export default {
 } */
 .cell[class] {
   display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   flex-direction: column;
   flex-wrap: nowrap;
   min-height: 2rem;
+  justify-content: center;
   /* margin-top: auto;
   margin-bottom: auto; */
   /* display: -ms-grid; */

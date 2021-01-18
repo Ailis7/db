@@ -2,13 +2,14 @@
   <div id="FirstGarantee">
     <div
       class="container-fluid"
-      style="background-color: #f5f5f5"
+      style="background-color: #f5f5f5; height: 100vh"
       ref="mainContainer"
     >
       <!-- <button style="height: 100px; width: 100px">{{}}</button> -->
       <div
-        class="row mb-2 pt-3 pl-3 pr-3 pb-2"
-        style="background-color: #ffffff"
+        class="row pt-3 pl-3 pr-3 pb-2"
+        style="background-color: #ffffff; height: 13.5%; margin-bottom: 1%"
+        ref="headerProject"
       >
         <div class="col-1 p-0" style="min-width: 5em">
           <img class="logo" src="../svg/logo_bg.svg" style="width: 100%" />
@@ -22,15 +23,13 @@
         </div>
       </div>
 
-      <div class="row m-1" style="height: calc(100vh - 2.5em - 2em)">
+      <div class="row ml-1 mr-1" style="height: 83.5%">
         <div
           class="col-8 mr-2 pb-2 d-flex flex-column justify-content-between"
           style="background-color: #ffffff; border-radius: 20px"
           ref="comissionStatistic"
         >
-          <div class="row pt-1 h5 m-0">
-            Комиссия
-          </div>
+          <div class="row pt-1 h5 m-0">Комиссия</div>
 
           <div class="row">
             <div class="col-3 my-auto text-uppercase">Сегодня</div>
@@ -150,31 +149,42 @@ export default {
         { value: 2, avg_cheque: '' },
       ],
       rest: [{ value: 2 }, { value: 10 }],
-      sumHeight: [],
-      headHeight: 310,
+      sumHeight: '100vh',
     };
   },
   methods: {
     arrowPrev() {
-      this.$emit('arrowClick', 'prev');
+      this.$emit('arrowClick', {id: 0, direction: 'prev'});
     },
     arrowNext() {
-      this.$emit('arrowClick', 'next');
+      this.$emit('arrowClick', {id: 0, direction: 'next'});
     },
     handleResize: function () {
-      // console.log(e.currentTarget.innerHeight, e.currentTarget.innerWidth);
-      console.log(
-        this.$refs.comissionStatistic.clientHeight,
-        this.$refs.allDeal.clientHeight,
-      );
-      // console.log(e.target.querySelectorAll('.d-flex'));
+      if (this.$refs.mainContainer.clientWidth > 800) {
+        this.$refs.mainContainer.style.height =
+          document.documentElement.clientHeight + 'px';
+        const countHeight =
+          (this.$refs.headerProject.clientHeight +
+            this.$refs.allDeal.clientHeight) /
+          0.97;
+        const browserHeight = document.documentElement.clientHeight;
+        this.sumHeight =
+          countHeight > browserHeight ? countHeight + 'px' : '100vh';
+        this.$refs.mainContainer.style.height = this.sumHeight;
+        const newCountHeight =
+          (this.$refs.headerProject.clientHeight +
+            this.$refs.allDeal.clientHeight) /
+          0.97;
+        if (newCountHeight > countHeight) {
+          this.$refs.mainContainer.style.height = newCountHeight + 'px';
+          this.$emit('handleResize', newCountHeight + 'px');
+        } else {
+          this.$emit('handleResize', this.sumHeight);
+        }
+      }
     },
-    handleResize2: function ({ height }) {
-      this.sumHeight[1] = height;
-      this.$emit(
-        'handleResize',
-        this.headHeight + this.sumHeight[0] + this.sumHeight[1],
-      );
+    handleResizeTest: function () {
+      console.log('hey!')
     },
   },
   computed: {
@@ -185,7 +195,7 @@ export default {
   created() {
     window.addEventListener('resize', this.handleResize);
   },
-  destroyed() {
+  beforeDestroy() {
     window.removeEventListener('resize', this.handleResize);
   },
 };
@@ -194,9 +204,5 @@ export default {
 <style>
 div.col.progress {
   border-radius: 20px;
-}
-
-.second-column {
-  display: grid;
 }
 </style>

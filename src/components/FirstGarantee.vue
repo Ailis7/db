@@ -2,37 +2,37 @@
   <div id="FirstGarantee">
     <div
       class="container-fluid"
-      style="background-color: #f5f5f5; height: 100vh"
+      style="background-color: #f5f5f5; min-height: 100vh"
       ref="mainContainer"
     >
       <!-- <button style="height: 100px; width: 100px">{{}}</button> -->
       <div
-        class="row pt-3 pl-3 pr-3 pb-2"
-        style="background-color: #ffffff; height: 13.5%; margin-bottom: 1%"
+        class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
+        style="background-color: #ffffff; min-height: 13.5%; margin-bottom: 1%"
         ref="headerProject"
       >
-        <div class="col-1 p-0" style="min-width: 5em">
+        <div class="col-1 col-md-1 p-0" style="min-width: 5em">
           <img class="logo" src="../svg/logo_bg.svg" style="width: 100%" />
         </div>
-        <div class="col pl-3">
+        <div class="col-12 col-md pl-3 pr-0 headerName">
           <div class="h1" style="line-height: 0.6">Банковские гарантии</div>
         </div>
-        <div class="col-3 col-sm-2 d-flex justify-content-end">
+        <div class="col-2 d-flex justify-content-end p-0">
           <a class="prev-button mr-1" @click="arrowPrev"></a>
           <a class="next-button" @click="arrowNext"> </a>
         </div>
       </div>
 
-      <div class="row ml-1 mr-1" style="height: 83.5%">
+      <div class="row ml-1 mr-1" style="min-height: 83.5%">
         <div
-          class="col-8 mr-2 pb-2 d-flex flex-column justify-content-between"
+          class="col-12 col-md-8 mr-2 pb-2 d-flex flex-column justify-content-between"
           style="background-color: #ffffff; border-radius: 20px"
           ref="comissionStatistic"
         >
           <div class="row pt-1 h5 m-0">Комиссия</div>
 
           <div class="row">
-            <div class="col-3 my-auto text-uppercase">Сегодня</div>
+            <div class="col-3 col-md-3 my-auto text-uppercase">Сегодня</div>
             <div class="col bigDigits mb-2 d-flex justify-content-end">
               {{ comissions[0].value.toLocaleString('ru-RU') }} ₽
             </div>
@@ -48,7 +48,7 @@
             :key="comission.value"
           >
             <div class="row text-uppercase">
-              <div class="col-4 my-auto">{{ comission.label }}</div>
+              <div class="col-6 col-md-4 my-auto">{{ comission.label }}</div>
               <div class="col h2 d-flex justify-content-end my-auto">
                 {{ comission.value.toLocaleString('ru-RU') }} ₽
               </div>
@@ -138,6 +138,8 @@ export default {
   name: 'FirstGarantee',
   data() {
     return {
+      elemID: 0,
+      sumHeight: '100vh',
       comissions: [
         { label: 'Сегодня', value: 1098754 },
         { label: 'Вчера', value: 257272 },
@@ -149,32 +151,38 @@ export default {
         { value: 2, avg_cheque: '' },
       ],
       rest: [{ value: 2 }, { value: 10 }],
-      sumHeight: '100vh',
     };
   },
   methods: {
     arrowPrev() {
-      this.$emit('arrowClick', {id: 0, direction: 'prev'});
+      this.$emit('arrowClick', 'prev');
     },
     arrowNext() {
-      this.$emit('arrowClick', {id: 0, direction: 'next'});
+      this.$emit('arrowClick', 'next');
     },
     handleResize: function () {
-      if (this.$refs.mainContainer.clientWidth > 800) {
+      if (this.$refs.mainContainer.clientWidth === 0) setTimeout(()=> this.handleResize(), 1000);
+      if (this.$refs.mainContainer.clientWidth > 600) {
         this.$refs.mainContainer.style.height =
           document.documentElement.clientHeight + 'px';
+
         const countHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allDeal.clientHeight) /
           0.97;
+
         const browserHeight = document.documentElement.clientHeight;
+        
         this.sumHeight =
           countHeight > browserHeight ? countHeight + 'px' : '100vh';
+        
         this.$refs.mainContainer.style.height = this.sumHeight;
+        
         const newCountHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allDeal.clientHeight) /
           0.97;
+        
         if (newCountHeight > countHeight) {
           this.$refs.mainContainer.style.height = newCountHeight + 'px';
           this.$emit('handleResize', newCountHeight + 'px');
@@ -192,12 +200,12 @@ export default {
       return this.comissions.filter((e) => this.comissions.indexOf(e) > 0);
     },
   },
-  created() {
-    window.addEventListener('resize', this.handleResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
-  },
+  // created() {
+  //   window.addEventListener('resize', this.handleResize);
+  // },
+  // beforeDestroy() {
+  //   window.removeEventListener('resize', this.handleResize);
+  // },
 };
 </script>
 
@@ -205,4 +213,10 @@ export default {
 div.col.progress {
   border-radius: 20px;
 }
+
+@media (max-width: 800px) {
+  
+ 
+}
+
 </style>

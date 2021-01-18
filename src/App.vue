@@ -11,16 +11,21 @@
       arrow="never"
       ref="carousel"
       :height="carouselHeight"
+      @change="change"
     >
       <el-carousel-item>
         <first-garantee
           @arrowClick="arrowClick"
           @handleResize="handleResize"
-          ref="hey"
+          ref="firstGarantee"
         ></first-garantee>
       </el-carousel-item>
       <el-carousel-item>
-        <second-garantee @arrowClick="arrowClick"></second-garantee>
+        <second-garantee
+          @arrowClick="arrowClick"
+          @handleResize="handleResize"
+          ref="secondGarantee"
+        ></second-garantee>
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -42,26 +47,45 @@ export default {
     };
   },
   methods: {
-    arrowClick(direction) {
-      this.$refs.hey.handleResizeTest();
-      console.log(document.querySelectorAll('.el-carousel__item'));
-      if (direction === 'prev') {
-        this.$refs.carousel.prev()
+    arrowClick(swipe) {
+      if (swipe.direction === 'prev') {
+        this.$refs.carousel.prev();
       } else {
         this.$refs.carousel.next();
       }
     },
+    change(index) {
+      for (let prop in this.$refs) {
+        let vueElem = this.$refs[prop];
+        if (vueElem.elemID === index) {
+          this.currentComponent = vueElem;
+          this.changeResize();
+          console.log(this.currentComponent);
+        }
+      }
+    },
     handleResize(height) {
       this.carouselHeight = height;
-      // console.log(height);
+    },
+    changeResize() {
+      this.currentComponent.handleResize();
     },
   },
-
+  created() {
+    window.addEventListener('resize', this.changeResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.changeResize);
+  },
   computed: {},
+  mounted: function () {
+    this.currentComponent = this.$refs.firstGarantee;
+    this.currentComponent.handleResize();
+  },
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
 
 html body {
@@ -69,20 +93,27 @@ html body {
 }
 
 @function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
-  $k: ($f-max - $f-min)/($v-max - $v-min);
+  $k: ($f-max - $f-min)/ ($v-max - $v-min);
   $b: $f-min - $k * $v-min;
 
   $b: $b * 1px;
 
-  @return calc( #{$k} * 100vw + #{$b} );
+  @return calc(#{$k} * 100vw + #{$b});
 }
 html {
   font-size: calcFluidFontSize(28, 40, 1280, 1920);
 }
 
-// html {
-//   font-size: calc((100vw - 1280px) / (1920 - 1280) * (40 - 28) + 28px);
-// }
+@media (max-width: 767px) {
+  html body {
+    font-size: 15px;
+  }
+  .headerName[class] {
+    margin-right: -100px;
+    padding-top: 8px;
+    padding-left: 5px !important;
+  }
+}
 
 .col[class],
 .row[class],

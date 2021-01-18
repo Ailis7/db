@@ -2,26 +2,30 @@
   <div id="SecondGarantee">
     <div
       class="container-fluid"
-      style="background-color: #f5f5f5; height: 100vh"
+      style="background-color: #f5f5f5; min-height: 100vh"
+      ref="mainContainer"
     >
       <div
-        class="row mb-2 pt-3 pl-3 pr-3 pb-2"
-        style="background-color: #ffffff"
+        class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
+        style="background-color: #ffffff; min-height: 13.5%; margin-bottom: 1%"
+        ref="headerProject"
       >
-        <div class="col-1 p-0" style="min-width: 5em">
+        <div class="col-1 col-md-1 p-0" style="min-width: 5em">
           <img class="logo" src="../svg/logo_bg.svg" style="width: 100%" />
         </div>
-        <div class="col pl-3">
+        <div class="col-12 col-md pl-3 pr-0 headerName">
           <div class="h1" style="line-height: 0.6">Банковские гарантии</div>
         </div>
-        <div class="col-3 col-sm-2 d-flex justify-content-end">
+        <div class="col-2 d-flex justify-content-end p-0">
           <a class="prev-button mr-1" @click="arrowPrev"></a>
           <a class="next-button" @click="arrowNext"> </a>
         </div>
       </div>
+
       <div
-        class="m-1 d-flex flex-column justify-content-between"
-        style="height: calc(100vh - 2.5em - 2em)"
+        class="ml-1 mr-1 d-flex flex-column justify-content-between"
+        style="min-height: 83.5%"
+        ref="allStatistic"
       >
         <div class="row h5">
           <div class="col"></div>
@@ -36,7 +40,7 @@
           </div>
         </div>
 
-        <div class="row white pt-2 flex-fill">
+        <div class="row white flex-fill">
           <div class="col cell h5 text-uppercase" style="font-weight: normal">
             Объем <strong>портфеля</strong>
           </div>
@@ -110,7 +114,7 @@
           </div>
         </div>
 
-        <div class="row white pt-2 flex-fill mt-2 mb-2">
+        <div class="row white flex-fill mt-2 mb-2" ref="oneOfTwoRow">
           <div class="col cell h5 text-uppercase" style="font-weight: normal;">
             Количество <strong>сделок</strong>
           </div>
@@ -172,7 +176,9 @@
               </div>
             </div>
             <div class="row">
-              <small class="text-uppercase col"
+              <small
+                class="text-uppercase col __listner__"
+                ref="absoluteHeightListner"
                 >наша доля
                 <p class="m-0">за год</p></small
               >
@@ -184,7 +190,7 @@
           </div>
         </div>
 
-        <div class="row white pt-2 pb-2 mb-1 flex-fill">
+        <div class="row white flex-fill">
           <div class="col cell h5 text-uppercase" style="font-weight: normal;">
             Сделки по <strong>новым клиентам</strong>
           </div>
@@ -202,84 +208,8 @@
               </div>
             </div>
           </div>
-          <div class="col"></div>
+          <div class="col cell"></div>
         </div>
-
-        <!-- <div class="row" style="height: 250px;margin-top: 10px;">
-          <div
-            class="col-md-2 title"
-            style="margin-top:auto;margin-bottom: auto;font-size: 40px;"
-          >
-            Количество сделок
-          </div>
-          <div class="col-md-10 white" style="height: 100%; padding: 20px;">
-            <div class="row">
-              <div
-                class="col-md-4"
-                style="background-color:#fff;"
-                ng-repeat="data in sdelki2"
-              >
-                <div class="row">
-                  <div
-                    class="col-md-12 h1 hand"
-                    ng-bind-html="abbreviateNumber(data.value, 1)"
-                    data-ng-attr-title="{{declension(data.value, ['сделка', 'сделки', 'сделок'])}}"
-                  ></div>
-                </div>
-                <div class="row">
-                  <div
-                    class="col-md-5 {{data.plan < 100 ? 'decrease2' : 'increase2'}}"
-                  >
-                    {{ strict(data.plan) }}%
-                  </div>
-                  <div
-                    class="col-md-5 {{data.year < 0 ? 'decrease' : 'increase'}}"
-                  >
-                    {{ strict(data.year) }}%
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-5 h3">от плана</div>
-                  <div class="col-md-5 h3">за год</div>
-                </div>
-              </div>
-
-              <div class="col-md-4" style="background-color:#fff;">
-                <div class="row">
-                  <div
-                    class="col-md-12 h1"
-                    ng-bind-html="percentStyle(market[1].value, 1)"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- <div class="row" style="height: 250px;margin-top: 10px;">
-          <div
-            class="col-md-2 title"
-            style="margin-top:auto;margin-bottom: auto;font-size: 40px;"
-          >
-            Сделки по новым клиентам
-          </div>
-          <div class="col-md-10 white" style="height: 100%; padding: 20px;">
-            <div class="row">
-              <div
-                class="col-md-4"
-                style="background-color:#fff;"
-                ng-repeat="data in new_sdelki"
-              >
-                <div class="row">
-                  <div
-                    class="col-md-12 h1"
-                    ng-bind-html="abbreviateNumber(data.value, 1)"
-                    data-ng-attr-title="{{declension(data.value, ['сделка', 'сделки', 'сделок'])}}"
-                  ></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
@@ -292,6 +222,8 @@ export default {
   name: 'SecondGarantee',
   data() {
     return {
+      elemID: 1,
+      sumHeight: '100vh',
       comissions: [
         { label: 'Сегодня', value: 1098754 },
         { label: 'Вчера', value: 257272 },
@@ -307,18 +239,50 @@ export default {
   },
   methods: {
     arrowPrev() {
-      this.$emit('arrowClick', {id: 1, direction: 'prev'});
+      this.$emit('arrowClick', 'prev');
     },
     arrowNext() {
-      this.$emit('arrowClick', {id: 1, direction: 'next'});
+      this.$emit('arrowClick', 'next');
     },
-    getPercent(array, value, key) {
-      var max = 0;
-      array.forEach((item) => {
-        max = item[key] > max ? item[key] : max;
-      });
-      console.log((value * 100) / max + '%');
-      return (value * 100) / max + +'%';
+    handleResize: function() {
+      console.log(
+        this.$refs.absoluteHeightListner.getBoundingClientRect(),
+        'absolute',
+      );
+      console.log(this.$refs.oneOfTwoRow.getBoundingClientRect(), 'row');
+      if (this.$refs.mainContainer.clientWidth === 0)
+        setTimeout(() => this.handleResize(), 1000);
+      if (this.$refs.mainContainer.clientWidth > 600) {
+        this.$refs.mainContainer.style.height =
+          document.documentElement.clientHeight + 'px';
+
+        const sumHeight =
+          (this.$refs.headerProject.clientHeight +
+            this.$refs.allStatistic.clientHeight) /
+          0.97;
+
+        const browserHeight = document.documentElement.clientHeight;
+
+        this.sumHeight = sumHeight > browserHeight ? sumHeight + 'px' : '100vh';
+
+        this.$refs.mainContainer.style.height = this.sumHeight;
+
+        const newSumHeight =
+          (this.$refs.headerProject.clientHeight +
+            this.$refs.allStatistic.clientHeight) /
+          0.97;
+
+        // console.log(newSumHeight, sumHeight);
+        if (newSumHeight > sumHeight) {
+          this.$refs.mainContainer.style.height = newSumHeight + 'px';
+          this.$emit('handleResize', newSumHeight + 'px');
+        } else {
+          this.$emit('handleResize', this.sumHeight);
+        }
+      }
+    },
+    handleResizeTest: function() {
+      console.log('hey!');
     },
   },
   computed: {

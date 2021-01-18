@@ -299,9 +299,6 @@ export default {
   border-radius: 20px;
 }
 
-/* div.col.my-auto.num {
-  padding-bottom: 2rem;
-} */
 .cell[class] {
   display: flex;
   display: -ms-flexbox;
@@ -310,15 +307,9 @@ export default {
   flex-wrap: nowrap;
   min-height: 2rem;
   justify-content: center;
-  /* margin-top: auto;
-  margin-bottom: auto; */
-  /* display: -ms-grid; */
 }
 
 .manyText {
   padding-top: 0.9rem;
 }
-/* .text_center[class] {
-  padding-left: 1rem;
-} */
 </style>

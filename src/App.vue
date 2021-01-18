@@ -140,12 +140,6 @@ small[class] {
   }
 }
 
-// .prev-button:hover,
-// .next-button:hover {
-//   opacity: 1;
-//   cursor: pointer;
-// }
-
 .prev-button {
   background-image: url('./svg/arrow-left.svg');
 }
@@ -170,17 +164,11 @@ small.text-uppercase {
 }
 
 small.text-uppercase.col {
-  padding: 0;
-  // position: absolute;
-
-  
+  padding: 0; 
 }
 
 small.text-uppercase.col.text_center {
-  // left: 2.4rem;
-  padding-left: 2.75rem;
-  // align-items: center;
-  
+  // padding-left: 2.75rem;
 }
 
 .decrease {
@@ -203,28 +191,4 @@ small.text-uppercase.col.text_center {
   padding: 0;
 }
 
-/* @media screen and (max-width: 1281px) {
-  html {
-    font-size: 26px;
-  }
-  small.text-uppercase.col.text-center {
-    left: 2.9rem;
-  }
-}
-@media screen and (max-width: 1481px) {
-  html {
-    font-size: 30px;
-  }
-}
-
-@media screen and (max-width: 1700px) {
-  html {
-    font-size: 32px;
-  }
-}
-
-
-@media screen and (max-width: 1700px) {
-  
-} */
 </style>

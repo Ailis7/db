@@ -2,12 +2,12 @@
   <div id="SecondGarantee">
     <div
       class="container-fluid"
-      style="background-color: #f5f5f5; min-height: 100vh"
+      style="background-color: #f5f5f5; height: 100vh"
       ref="mainContainer"
     >
       <div
         class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
-        style="background-color: #ffffff; min-height: 13.5%; margin-bottom: 1%"
+        style="background-color: #ffffff; height: 13.5%; margin-bottom: 1%"
         ref="headerProject"
       >
         <div class="col-1 col-md-1 p-0" style="min-width: 5em">
@@ -24,7 +24,7 @@
 
       <div
         class="ml-1 mr-1 d-flex flex-column justify-content-between"
-        style="min-height: 83.5%"
+        style="height: 83.5%"
         ref="allStatistic"
       >
         <div class="row h5">
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="row white flex-fill">
+        <div class="row white flex-fill" ref="oneOfTwoRow">
           <div class="col cell h5 text-uppercase" style="font-weight: normal">
             Объем <strong>портфеля</strong>
           </div>
@@ -114,7 +114,7 @@
           </div>
         </div>
 
-        <div class="row white flex-fill mt-2 mb-2" ref="oneOfTwoRow">
+        <div class="row white flex-fill mt-2 mb-2" ref="twoOfTwoRow">
           <div class="col cell h5 text-uppercase" style="font-weight: normal;">
             Количество <strong>сделок</strong>
           </div>
@@ -245,37 +245,43 @@ export default {
       this.$emit('arrowClick', 'next');
     },
     handleResize: function() {
-      console.log(
-        this.$refs.absoluteHeightListner.getBoundingClientRect(),
-        'absolute',
-      );
-      console.log(this.$refs.oneOfTwoRow.getBoundingClientRect(), 'row');
-      if (this.$refs.mainContainer.clientWidth === 0)
-        setTimeout(() => this.handleResize(), 1000);
+      if (this.$refs.mainContainer.clientWidth === 0) setTimeout(()=> this.handleResize(), 1000);
+     
       if (this.$refs.mainContainer.clientWidth > 600) {
         this.$refs.mainContainer.style.height =
           document.documentElement.clientHeight + 'px';
 
-        const sumHeight =
+        const absoluteBottom = this.$refs.absoluteHeightListner.getBoundingClientRect().bottom;
+        const rowBottom = this.$refs.twoOfTwoRow.getBoundingClientRect();
+        const sumBott = absoluteBottom - rowBottom.bottom;
+        console.log('hey2', sumBott)
+        if (sumBott > 0) {
+          console.log('hey1')
+          this.$refs.twoOfTwoRow.style.minHeight = rowBottom.height + sumBott * 2 + 'px';
+          this.$refs.oneOfTwoRow.style.minHeight = rowBottom.height + sumBott * 2 + 'px';
+          console.log(this.$refs.oneOfTwoRow.clientHeight, this.$refs.twoOfTwoRow.clientHeight, this.$refs.headerProject.clientHeight)
+        }
+
+        const countHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allStatistic.clientHeight) /
           0.97;
 
         const browserHeight = document.documentElement.clientHeight;
-
-        this.sumHeight = sumHeight > browserHeight ? sumHeight + 'px' : '100vh';
-
+        
+        this.sumHeight =
+          countHeight > browserHeight ? countHeight + 'px' : '100vh';
+        
         this.$refs.mainContainer.style.height = this.sumHeight;
-
-        const newSumHeight =
+        
+        const newCountHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allStatistic.clientHeight) /
           0.97;
-
-        // console.log(newSumHeight, sumHeight);
-        if (newSumHeight > sumHeight) {
-          this.$refs.mainContainer.style.height = newSumHeight + 'px';
-          this.$emit('handleResize', newSumHeight + 'px');
+        
+        if (newCountHeight > countHeight) {
+          this.$refs.mainContainer.style.height = newCountHeight + 'px';
+          this.$emit('handleResize', newCountHeight + 'px');
         } else {
           this.$emit('handleResize', this.sumHeight);
         }

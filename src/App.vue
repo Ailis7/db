@@ -60,7 +60,6 @@ export default {
         if (vueElem.elemID === index) {
           this.currentComponent = vueElem;
           this.changeResize();
-          console.log(this.currentComponent);
         }
       }
     },

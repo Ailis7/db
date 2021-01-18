@@ -2,13 +2,13 @@
   <div id="FirstGarantee">
     <div
       class="container-fluid"
-      style="background-color: #f5f5f5; min-height: 100vh"
+      style="background-color: #f5f5f5; height: 100vh"
       ref="mainContainer"
     >
       <!-- <button style="height: 100px; width: 100px">{{}}</button> -->
       <div
         class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
-        style="background-color: #ffffff; min-height: 13.5%; margin-bottom: 1%"
+        style="background-color: #ffffff; height: 13.5%; margin-bottom: 1%"
         ref="headerProject"
       >
         <div class="col-1 col-md-1 p-0" style="min-width: 5em">
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="row ml-1 mr-1" style="min-height: 83.5%">
+      <div class="row ml-1 mr-1" style="height: 83.5%">
         <div
           class="col-12 col-md-8 mr-2 pb-2 d-flex flex-column justify-content-between"
           style="background-color: #ffffff; border-radius: 20px"
@@ -162,6 +162,7 @@ export default {
     },
     handleResize: function () {
       if (this.$refs.mainContainer.clientWidth === 0) setTimeout(()=> this.handleResize(), 1000);
+     
       if (this.$refs.mainContainer.clientWidth > 600) {
         this.$refs.mainContainer.style.height =
           document.documentElement.clientHeight + 'px';

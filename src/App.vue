@@ -168,7 +168,7 @@ small.text-uppercase.col {
 }
 
 small.text-uppercase.col.text_center {
-  // padding-left: 2.75rem;
+  padding-left: 1.75rem;
 }
 
 .decrease {

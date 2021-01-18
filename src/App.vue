@@ -170,12 +170,17 @@ small.text-uppercase {
 }
 
 small.text-uppercase.col {
-  position: absolute;
   padding: 0;
+  // position: absolute;
+
+  
 }
 
-small.text-uppercase.col.text-center {
-  left: 2.4rem;
+small.text-uppercase.col.text_center {
+  // left: 2.4rem;
+  padding-left: 2.75rem;
+  // align-items: center;
+  
 }
 
 .decrease {

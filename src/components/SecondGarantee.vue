@@ -7,7 +7,7 @@
     >
       <div
         class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
-        style="background-color: #ffffff; height: 13.5%; margin-bottom: 1%"
+        style="background-color: #ffffff; min-height: 13.5%; margin-bottom: 1%"
         ref="headerProject"
       >
         <div class="col-1 col-md-1 p-0" style="min-width: 5em">
@@ -24,7 +24,7 @@
 
       <div
         class="ml-1 mr-1 d-flex flex-column justify-content-between"
-        style="height: 83.5%"
+        style="min-height: 83.5%"
         ref="allStatistic"
       >
         <div class="row h5">
@@ -62,7 +62,7 @@
             </div>
             <div class="row">
               <small class="text-uppercase col">от плана</small>
-              <small class="text-uppercase col text-center">за год</small>
+              <small class="text-uppercase col text_center">за год</small>
             </div>
           </div>
 
@@ -83,10 +83,10 @@
             </div>
             <div class="row">
               <small class="text-uppercase col">от плана</small>
-              <small class="text-uppercase col text-center">за год</small>
+              <small class="text-uppercase col text_center">за год</small>
             </div>
           </div>
-          <div class="col cell">
+          <div class="col cell manyText">
             <div class="row">
               <div class="col bigDigits">2.9%</div>
               <!-- не нашёл переменной -->
@@ -106,7 +106,7 @@
                 >наша доля
                 <p class="m-0">за год</p></small
               >
-              <small class="text-uppercase col text-center"
+              <small class="text-uppercase col text_center"
                 >рынок
                 <p class="m-0">за год</p></small
               >
@@ -136,7 +136,7 @@
             </div>
             <div class="row">
               <small class="text-uppercase col">от плана</small>
-              <small class="text-uppercase col text-center">за год</small>
+              <small class="text-uppercase col text_center">за год</small>
             </div>
           </div>
 
@@ -157,10 +157,10 @@
             </div>
             <div class="row">
               <small class="text-uppercase col">от плана</small>
-              <small class="text-uppercase col text-center">за год</small>
+              <small class="text-uppercase col text_center">за год</small>
             </div>
           </div>
-          <div class="col cell">
+          <div class="col cell manyText">
             <div class="row">
               <div class="col bigDigits">15.6%</div>
               <!-- не нашёл переменной -->
@@ -182,7 +182,7 @@
                 >наша доля
                 <p class="m-0">за год</p></small
               >
-              <small class="text-uppercase col text-center"
+              <small class="text-uppercase col text_center"
                 >рынок
                 <p class="m-0">за год</p></small
               >
@@ -244,23 +244,15 @@ export default {
     arrowNext() {
       this.$emit('arrowClick', 'next');
     },
-    handleResize: function() {
+    handleResize: function() { //  allStatistic headerProject
       if (this.$refs.mainContainer.clientWidth === 0) setTimeout(()=> this.handleResize(), 1000);
      
       if (this.$refs.mainContainer.clientWidth > 600) {
         this.$refs.mainContainer.style.height =
           document.documentElement.clientHeight + 'px';
 
-        const absoluteBottom = this.$refs.absoluteHeightListner.getBoundingClientRect().bottom;
-        const rowBottom = this.$refs.twoOfTwoRow.getBoundingClientRect();
-        const sumBott = absoluteBottom - rowBottom.bottom;
-        console.log('hey2', sumBott)
-        if (sumBott > 0) {
-          console.log('hey1')
-          this.$refs.twoOfTwoRow.style.minHeight = rowBottom.height + sumBott * 2 + 'px';
-          this.$refs.oneOfTwoRow.style.minHeight = rowBottom.height + sumBott * 2 + 'px';
-          console.log(this.$refs.oneOfTwoRow.clientHeight, this.$refs.twoOfTwoRow.clientHeight, this.$refs.headerProject.clientHeight)
-        }
+
+        console.log(this.$refs.allStatistic.clientHeight, 'all')
 
         const countHeight =
           (this.$refs.headerProject.clientHeight +
@@ -278,6 +270,8 @@ export default {
           (this.$refs.headerProject.clientHeight +
             this.$refs.allStatistic.clientHeight) /
           0.97;
+
+          console.log(this.$refs.allStatistic.clientHeight, 'all2')
         
         if (newCountHeight > countHeight) {
           this.$refs.mainContainer.style.height = newCountHeight + 'px';
@@ -320,4 +314,11 @@ export default {
   margin-bottom: auto; */
   /* display: -ms-grid; */
 }
+
+.manyText {
+  padding-top: 0.9rem;
+}
+/* .text_center[class] {
+  padding-left: 1rem;
+} */
 </style>

@@ -87,6 +87,12 @@ export default {
 </script>
 
 <style lang="scss">
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap');
 
 html body {
@@ -146,7 +152,7 @@ html {
   min-height: 13.5%;
 }
 
-.main.row {
+main.row {
   min-height: 83.5%;
 }
 

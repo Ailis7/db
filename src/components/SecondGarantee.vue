@@ -249,15 +249,12 @@ export default {
      
       if (this.$refs.mainContainer.clientWidth > 767) {
         this.$refs.mainContainer.style.height =
-          document.documentElement.clientHeight + 'px';
-
-
-        console.log(this.$refs.allStatistic.clientHeight, 'all')
+          '100vh';
 
         const countHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allStatistic.clientHeight) /
-          0.97;
+          0.98;
 
         const browserHeight = document.documentElement.clientHeight;
         
@@ -269,9 +266,7 @@ export default {
         const newCountHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allStatistic.clientHeight) /
-          0.97;
-
-          console.log(this.$refs.allStatistic.clientHeight, 'all2')
+          0.98;
         
         if (newCountHeight > countHeight) {
           this.$refs.mainContainer.style.height = newCountHeight + 'px';

@@ -6,7 +6,7 @@
       ref="mainContainer"
     >
       <!-- <button style="height: 100px; width: 100px">{{}}</button> -->
-      <head
+      <header
         class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
         style="background-color: #ffffff; margin-bottom: 1%"
         ref="headerProject"
@@ -21,7 +21,7 @@
           <a class="prev-button mr-1" @click="arrowPrev"></a>
           <a class="next-button" @click="arrowNext"> </a>
         </div>
-      </head>
+      </header>
 
       <main class="row ml-1 mr-1 ">
         <section
@@ -165,15 +165,12 @@ export default {
      
       if (this.$refs.mainContainer.clientWidth > 767) {
         this.$refs.mainContainer.style.height =
-          document.documentElement.clientHeight + 'px';
-
-
-        console.log(this.$refs.allDeal.clientHeight, 'all')
+          '100vh';
 
         const countHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allDeal.clientHeight) /
-          0.97;
+          0.98;
 
         const browserHeight = document.documentElement.clientHeight;
         
@@ -185,9 +182,7 @@ export default {
         const newCountHeight =
           (this.$refs.headerProject.clientHeight +
             this.$refs.allDeal.clientHeight) /
-          0.97;
-
-          console.log(this.$refs.allDeal.clientHeight, 'all2')
+          0.98;
         
         if (newCountHeight > countHeight) {
           this.$refs.mainContainer.style.height = newCountHeight + 'px';

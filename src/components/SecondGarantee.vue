@@ -5,9 +5,9 @@
       style="background-color: #f5f5f5; height: 100vh"
       ref="mainContainer"
     >
-      <div
+      <head
         class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
-        style="background-color: #ffffff; min-height: 13.5%; margin-bottom: 1%"
+        style="background-color: #ffffff; margin-bottom: 1%"
         ref="headerProject"
       >
         <div class="col-1 col-md-1 p-0" style="min-width: 5em">
@@ -20,15 +20,15 @@
           <a class="prev-button mr-1" @click="arrowPrev"></a>
           <a class="next-button" @click="arrowNext"> </a>
         </div>
-      </div>
+      </head>
 
-      <div
+      <main
         class="ml-1 mr-1 d-flex flex-column justify-content-between"
         style="min-height: 83.5%"
         ref="allStatistic"
       >
-        <div class="row h5">
-          <div class="col"></div>
+        <section class="row h5">
+          <div class="col-1 col-md-3"></div>
           <div class="col">
             На текущий день
           </div>
@@ -38,10 +38,10 @@
           <div class="col">
             Доля рынка
           </div>
-        </div>
+        </section>
 
-        <div class="row white flex-fill" ref="oneOfTwoRow">
-          <div class="col cell h5 text-uppercase" style="font-weight: normal">
+        <section class="row white flex-fill" ref="oneOfTwoRow">
+          <div class="col-1 col-md-3 cell h5 text-uppercase description" style="font-weight: normal">
             Объем <strong>портфеля</strong>
           </div>
 
@@ -112,10 +112,10 @@
               >
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="row white flex-fill mt-2 mb-2" ref="twoOfTwoRow">
-          <div class="col cell h5 text-uppercase" style="font-weight: normal;">
+        <section class="row white flex-fill mt-2 mb-2" ref="twoOfTwoRow">
+          <div class="col-1 col-md-3 cell h5 text-uppercase description" style="font-weight: normal;">
             Количество <strong>сделок</strong>
           </div>
 
@@ -188,10 +188,10 @@
               >
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="row white flex-fill">
-          <div class="col cell h5 text-uppercase" style="font-weight: normal;">
+        <section class="row white flex-fill">
+          <div class="col-1 col-md-3 cell h5 text-uppercase description" style="font-weight: normal;">
             Сделки по <strong>новым клиентам</strong>
           </div>
           <div class="col cell">
@@ -209,8 +209,8 @@
             </div>
           </div>
           <div class="col cell"></div>
-        </div>
-      </div>
+        </section>
+      </main>
     </div>
   </div>
 </template>
@@ -247,7 +247,7 @@ export default {
     handleResize: function() { //  allStatistic headerProject
       if (this.$refs.mainContainer.clientWidth === 0) setTimeout(()=> this.handleResize(), 1000);
      
-      if (this.$refs.mainContainer.clientWidth > 600) {
+      if (this.$refs.mainContainer.clientWidth > 767) {
         this.$refs.mainContainer.style.height =
           document.documentElement.clientHeight + 'px';
 
@@ -275,10 +275,12 @@ export default {
         
         if (newCountHeight > countHeight) {
           this.$refs.mainContainer.style.height = newCountHeight + 'px';
-          this.$emit('handleResize', newCountHeight + 'px');
+          this.$emit('handleResize', {height: newCountHeight + 'px', arrow: 'never'});
         } else {
-          this.$emit('handleResize', this.sumHeight);
+          this.$emit('handleResize', {height: this.sumHeight, arrow: 'never'});
         }
+      } else {
+        this.$emit('handleResize', {height: this.sumHeight, arrow: 'always'});
       }
     },
     handleResizeTest: function() {

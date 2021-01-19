@@ -8,7 +8,7 @@
     <el-carousel
       :interval="500000"
       indicator-position="none"
-      arrow="never"
+      :arrow="arrow"
       ref="carousel"
       :height="carouselHeight"
       @change="change"
@@ -44,6 +44,7 @@ export default {
   data() {
     return {
       carouselHeight: '100vh',
+      arrow: 'never',
     };
   },
   methods: {
@@ -63,8 +64,9 @@ export default {
         }
       }
     },
-    handleResize(height) {
+    handleResize({ height, arrow }) {
       this.carouselHeight = height;
+      this.arrow = arrow;
     },
     changeResize() {
       this.currentComponent.handleResize();
@@ -77,7 +79,7 @@ export default {
     window.removeEventListener('resize', this.changeResize);
   },
   computed: {},
-  mounted: function () {
+  mounted: function() {
     this.currentComponent = this.$refs.firstGarantee;
     this.currentComponent.handleResize();
   },
@@ -112,6 +114,40 @@ html {
     padding-top: 8px;
     padding-left: 5px !important;
   }
+
+  .mainHeader .col-2.d-flex,
+  .prev-button[class],
+  .next-button[class] {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  head.row.mainHeader[class] {
+    min-height: 7.5%;
+  }
+  .description {
+    -webkit-transform: rotate(-45deg); //Chrome, Safari
+    -moz-transform: rotate(-45deg); //Firefox
+    -o-transform: rotate(-45deg); //Opera
+    -ms-transform: rotate(-45deg); //IE
+    transform: rotate(90deg); //браузеры без префексов
+    display: block;
+  }
+  main.row {
+    min-height: 89.5%;
+    display: flex;
+  }
+  section.first_section {
+    margin-bottom: 1rem;
+  }
+}
+
+.mainHeader {
+  min-height: 13.5%;
+}
+
+.main.row {
+  min-height: 83.5%;
 }
 
 .col[class],
@@ -152,7 +188,6 @@ small[class] {
   line-height: 1;
   word-spacing: -0.5rem;
   padding: 0px;
-  /* margin: auto; */
 }
 .progress-bar[class] {
   border-radius: 20px;
@@ -164,7 +199,7 @@ small.text-uppercase {
 }
 
 small.text-uppercase.col {
-  padding: 0; 
+  padding: 0;
 }
 
 small.text-uppercase.col.text_center {
@@ -190,5 +225,4 @@ small.text-uppercase.col.text_center {
   margin-bottom: 0;
   padding: 0;
 }
-
 </style>

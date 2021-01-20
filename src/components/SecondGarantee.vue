@@ -5,8 +5,8 @@
       style="background-color: #f5f5f5; height: 100vh"
       ref="mainContainer"
     >
-      <head
-        class="row pt-3 pl-3 pr-3 pb-2 mainHeader"
+      <header
+        class="row pt-3 px-3 pb-2 mainHeader"
         style="background-color: #ffffff; margin-bottom: 1%"
         ref="headerProject"
       >
@@ -17,10 +17,17 @@
           <div class="h1" style="line-height: 0.6">Банковские гарантии</div>
         </div>
         <div class="col-2 d-flex justify-content-end p-0">
-          <a class="prev-button mr-1" @click="arrowPrev"></a>
-          <a class="next-button" @click="arrowNext"> </a>
+          <a
+            class="prev-button mr-1 btn btn-md btn-default  d-md-block d-none"
+            @click="arrowPrev"
+          ></a>
+          <a
+            class="next-button btn btn-md btn-default d-md-block d-none "
+            @click="arrowNext"
+          >
+          </a>
         </div>
-      </head>
+      </header>
 
       <main
         class="ml-1 mr-1 d-flex flex-column justify-content-between"
@@ -28,7 +35,7 @@
         ref="allStatistic"
       >
         <section class="row h5">
-          <div class="col-1 col-md-3"></div>
+          <div class="col-0 col-md-3"></div>
           <div class="col">
             На текущий день
           </div>
@@ -41,11 +48,11 @@
         </section>
 
         <section class="row white flex-fill" ref="oneOfTwoRow">
-          <div class="col-1 col-md-3 cell h5 text-uppercase description" style="font-weight: normal">
+          <div class="col-12 col-md-3 cell h5 text-uppercase description" style="font-weight: normal">
             Объем <strong>портфеля</strong>
           </div>
 
-          <div class="col cell">
+          <div class="col cell first_cell">
             <div class="row">
               <div class="col bigDigits">17.8 <span class="h5">млрд</span></div>
               <!-- не нашёл переменной -->
@@ -55,7 +62,7 @@
                 32%
                 <!-- {{ strict(data.plan) }}% -->
               </div>
-              <div class="col increase h5">
+              <div class="col increase h5 text_center">
                 104%
                 <!-- {{ strict(data.year) }}% -->
               </div>
@@ -76,7 +83,7 @@
                 85%
                 <!-- {{ strict(data.plan) }}% -->
               </div>
-              <div class="col increase h5">
+              <div class="col increase h5 text_center">
                 406%
                 <!-- {{ strict(data.year) }}% -->
               </div>
@@ -96,7 +103,7 @@
                 192%
                 <!-- {{ strict(data.plan) }}% -->
               </div>
-              <div class="col increase h5">
+              <div class="col increase h5 text_center">
                 4%
                 <!-- {{ strict(data.year) }}% -->
               </div>
@@ -115,11 +122,11 @@
         </section>
 
         <section class="row white flex-fill mt-2 mb-2" ref="twoOfTwoRow">
-          <div class="col-1 col-md-3 cell h5 text-uppercase description" style="font-weight: normal;">
+          <div class="col-12 col-md-3 cell h5 text-uppercase description" style="font-weight: normal;">
             Количество <strong>сделок</strong>
           </div>
 
-          <div class="col cell">
+          <div class="col cell first_cell">
             <div class="row">
               <div class="col bigDigits">18.1 <span class="h5">млрд</span></div>
               <!-- не нашёл переменной -->
@@ -129,7 +136,7 @@
                 16%
                 <!-- {{ strict(data.plan) }}% -->
               </div>
-              <div class="col increase h5">
+              <div class="col increase h5 text_center">
                 46%
                 <!-- {{ strict(data.year) }}% -->
               </div>
@@ -150,7 +157,7 @@
                 13%
                 <!-- {{ strict(data.plan) }}% -->
               </div>
-              <div class="col increase h5">
+              <div class="col increase h5 text_center">
                 13%
                 <!-- {{ strict(data.year) }}% -->
               </div>
@@ -170,7 +177,7 @@
                 21%
                 <!-- {{ strict(data.plan) }}% -->
               </div>
-              <div class="col increase h5">
+              <div class="col increase h5 text_center">
                 68%
                 <!-- {{ strict(data.year) }}% -->
               </div>
@@ -191,10 +198,10 @@
         </section>
 
         <section class="row white flex-fill">
-          <div class="col-1 col-md-3 cell h5 text-uppercase description" style="font-weight: normal;">
+          <div class="col-12 col-md-3 cell h5 text-uppercase description" style="font-weight: normal;">
             Сделки по <strong>новым клиентам</strong>
           </div>
-          <div class="col cell">
+          <div class="col cell first_cell">
             <div class="row">
               <div class="col bigDigits">
                 14.4 <span class="h5" style="display: inline;">тыс</span>
@@ -216,10 +223,11 @@
 </template>
 
 <script>
-// import { BCard } from "bootstrap-vue";
+import { resizeFunc } from '../mixins/resizeFunc'
 
 export default {
   name: 'SecondGarantee',
+  mixins: [resizeFunc],
   data() {
     return {
       elemID: 1,
@@ -245,41 +253,7 @@ export default {
       this.$emit('arrowClick', 'next');
     },
     handleResize: function() { //  allStatistic headerProject
-      if (this.$refs.mainContainer.clientWidth === 0) setTimeout(()=> this.handleResize(), 1000);
-     
-      if (this.$refs.mainContainer.clientWidth > 767) {
-        this.$refs.mainContainer.style.height =
-          '100vh';
-
-        const countHeight =
-          (this.$refs.headerProject.clientHeight +
-            this.$refs.allStatistic.clientHeight) /
-          0.98;
-
-        const browserHeight = document.documentElement.clientHeight;
-        
-        this.sumHeight =
-          countHeight > browserHeight ? countHeight + 'px' : '100vh';
-        
-        this.$refs.mainContainer.style.height = this.sumHeight;
-        
-        const newCountHeight =
-          (this.$refs.headerProject.clientHeight +
-            this.$refs.allStatistic.clientHeight) /
-          0.98;
-        
-        if (newCountHeight > countHeight) {
-          this.$refs.mainContainer.style.height = newCountHeight + 'px';
-          this.$emit('handleResize', {height: newCountHeight + 'px', arrow: 'never'});
-        } else {
-          this.$emit('handleResize', {height: this.sumHeight, arrow: 'never'});
-        }
-      } else {
-        this.$emit('handleResize', {height: this.sumHeight, arrow: 'always'});
-      }
-    },
-    handleResizeTest: function() {
-      console.log('hey!');
+      this.resizeCount('mainContainer', 'allStatistic', 'headerProject')
     },
   },
   computed: {
@@ -291,22 +265,6 @@ export default {
 </script>
 
 <style>
-.white {
-  background-color: #ffffff;
-  border-radius: 20px;
-}
 
-.cell[class] {
-  display: flex;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  min-height: 2rem;
-  justify-content: center;
-}
 
-.manyText {
-  padding-top: 0.9rem;
-}
 </style>

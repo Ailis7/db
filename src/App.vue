@@ -8,7 +8,7 @@
     <el-carousel
       :interval="500000"
       indicator-position="none"
-      :arrow="arrow"
+      arrow="always"
       ref="carousel"
       :height="carouselHeight"
       @change="change"
@@ -64,9 +64,8 @@ export default {
         }
       }
     },
-    handleResize({ height, arrow }) {
+    handleResize(height) {
       this.carouselHeight = height;
-      this.arrow = arrow;
     },
     changeResize() {
       this.currentComponent.handleResize();
@@ -99,53 +98,90 @@ html body {
   font-family: Roboto;
 }
 
-@function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
-  $k: ($f-max - $f-min)/ ($v-max - $v-min);
-  $b: $f-min - $k * $v-min;
+// @function calcFluidFontSize($f-min, $f-max, $v-min, $v-max) {
+//   $k: ($f-max - $f-min)/ ($v-max - $v-min);
+//   $b: $f-min - $k * $v-min;
 
-  $b: $b * 1px;
+//   $b: $b * 1px;
 
-  @return calc(#{$k} * 100vw + #{$b});
-}
+//   @return calc(#{$k} * 100vw + #{$b});
+// }
 html {
-  font-size: calcFluidFontSize(28, 40, 1280, 1920);
+  font-size: 20px;
+  // font-size: calcFluidFontSize(28, 40, 1280, 1920);
+}
+
+@media (min-width: 1920px) {
+  html {
+    font-size: 40px;
+  }
+}
+
+@media (min-width: 1600px) and (max-width: 1919px) {
+  html {
+    font-size: 35px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1600px) {
+  html {
+    font-size: 27px;
+  }
 }
 
 @media (max-width: 767px) {
-  html body {
-    font-size: 15px;
+  html {
+    font-size: 12px;
   }
   .headerName[class] {
     margin-right: -100px;
-    padding-top: 8px;
     padding-left: 5px !important;
   }
 
-  .mainHeader .col-2.d-flex,
-  .prev-button[class],
-  .next-button[class] {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
+  button.el-carousel__arrow[class] {
+    display: inline-block;
   }
-  head.row.mainHeader[class] {
+
+  header.row.mainHeader[class] {
     min-height: 7.5%;
+    font-size: 10px;
   }
-  .description {
-    -webkit-transform: rotate(-45deg); //Chrome, Safari
-    -moz-transform: rotate(-45deg); //Firefox
-    -o-transform: rotate(-45deg); //Opera
-    -ms-transform: rotate(-45deg); //IE
-    transform: rotate(90deg); //браузеры без префексов
-    display: block;
-  }
+  // .description {
+  //   -webkit-transform: rotate(-45deg); //Chrome, Safari
+  //   -moz-transform: rotate(-45deg); //Firefox
+  //   -o-transform: rotate(-45deg); //Opera
+  //   -ms-transform: rotate(-45deg); //IE
+  //   transform: rotate(90deg); //браузеры без префексов
+  //   display: block;
+  // }
   main.row {
     min-height: 89.5%;
     display: flex;
   }
-  section.first_section {
-    margin-bottom: 1rem;
+
+  .white {
+    .description[class] {
+      display: block;
+      height: 2rem;
+      text-align: center;
+      padding-top: 0.5rem;
+    }
+    .cell[class]:not(.description) {
+      margin-top: -10rem;
+    }
+    .first_cell {
+      margin-left: 1rem;
+    }
   }
+  main.row .row .col .row, .deal_description {
+
+    display: block;
+    text-align: center;
+  }
+}
+
+.el-carousel__arrow[class] {
+  display: none;
 }
 
 .mainHeader {
@@ -175,7 +211,7 @@ small[class] {
   height: 2em;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   opacity: 0.5;
-  background-size: 2em 2em;
+  background-size: 100%;
   &:hover {
     opacity: 1;
     cursor: pointer;
@@ -200,6 +236,10 @@ small[class] {
   background-color: #503aeb;
 }
 
+.progress[class] {
+  height: 0.8rem;
+}
+
 small.text-uppercase {
   font-size: 0.6rem;
 }
@@ -208,8 +248,8 @@ small.text-uppercase.col {
   padding: 0;
 }
 
-small.text-uppercase.col.text_center {
-  padding-left: 1.75rem;
+.text_center {
+  margin-left: 1.75rem;
 }
 
 .decrease {
@@ -223,6 +263,9 @@ small.text-uppercase.col.text_center {
 .increase::before {
   content: '\25b2'; /*"\2BC5";*/
   font-size: 1rem;
+  position: absolute;
+  left: -1.25rem;
+  top: 0.2rem;
 }
 
 .decrease[class],
@@ -230,5 +273,24 @@ small.text-uppercase.col.text_center {
 .increase2[class] {
   margin-bottom: 0;
   padding: 0;
+}
+
+.white {
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+
+.cell[class] {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  min-height: 2rem;
+  justify-content: center;
+}
+
+.manyText {
+  padding-top: 0.9rem;
 }
 </style>

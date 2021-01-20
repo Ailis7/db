@@ -32,7 +32,7 @@
 
       <main class="row ml-1 mr-1 ">
         <section
-          class="col-12 col-md-8 mr-2 mb-3 pb-2 d-flex flex-column justify-content-between"
+          class="col-12 col-md-8 mr-2 pb-2 d-flex flex-column justify-content-between"
           style="background-color: #ffffff; border-radius: 20px"
           ref="comissionStatistic"
         >
@@ -58,7 +58,7 @@
             :key="comission.value"
           >
             <div class="row text-uppercase">
-              <div class="col-6 col-md-4 cell">{{ comission.label }}</div>
+              <div class="col-5 col-md-4 cell">{{ comission.label }}</div>
               <div class="col h2 d-flex justify-content-end ml-auto">
                 {{ comission.value.toLocaleString('ru-RU') }} ₽
               </div>
@@ -183,11 +183,4 @@ export default {
 };
 </script>
 
-<style>
-div.col.progress {
-  border-radius: 20px;
-}
-
-@media (max-width: 800px) {
-}
-</style>
+<style></style>

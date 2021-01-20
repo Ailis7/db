@@ -1,7 +1,7 @@
 export const resizeFunc = {
   methods: {
     resizeCount(mainContainer, headerContainer, bodyContainer) {
-      console.log(mainContainer, headerContainer, bodyContainer)
+      console.log(this);
       if (this.$refs[mainContainer].clientWidth === 0) setTimeout(() => this.handleResize(...arguments), 1000);
 
       if (this.$refs[mainContainer].clientWidth > 767) {

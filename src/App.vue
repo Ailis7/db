@@ -27,6 +27,20 @@
           ref="secondGarantee"
         ></second-garantee>
       </el-carousel-item>
+      <el-carousel-item>
+        <first-factoring
+          @arrowClick="arrowClick"
+          @handleResize="handleResize"
+          ref="firstFactoring"
+        ></first-factoring>
+      </el-carousel-item>
+      <el-carousel-item>
+        <second-factoring
+          @arrowClick="arrowClick"
+          @handleResize="handleResize"
+          ref="secondFactoring"
+        ></second-factoring>
+      </el-carousel-item>
     </el-carousel>
   </div>
 </template>
@@ -34,12 +48,17 @@
 <script>
 import FirstGarantee from './components/FirstGarantee';
 import SecondGarantee from './components/SecondGarantee';
+import FirstFactoring from './components/FirstFactoring';
+import SecondFactoring from './components/SecondFactoring';
+
 
 export default {
   name: 'dashboard',
   components: {
     FirstGarantee,
     SecondGarantee,
+    FirstFactoring,
+    SecondFactoring
   },
   data() {
     return {
@@ -49,7 +68,7 @@ export default {
   },
   methods: {
     arrowClick(swipe) {
-      if (swipe.direction === 'prev') {
+      if (swipe === 'prev') {
         this.$refs.carousel.prev();
       } else {
         this.$refs.carousel.next();
@@ -166,18 +185,22 @@ html {
       text-align: center;
       padding-top: 0.5rem;
     }
-    .cell[class]:not(.description) {
-      margin-top: -10rem;
-    }
+    // .cell[class]:not(.description) {
+    //   margin-top: -10rem;
+    // }
     .first_cell {
       margin-left: 1rem;
     }
   }
-  main.row .row .col .row, .deal_description {
-
+  main.row .row .col .row,
+  .deal_description {
     display: block;
     text-align: center;
   }
+}
+
+div.col.progress {
+  border-radius: 20px;
 }
 
 .el-carousel__arrow[class] {
@@ -228,9 +251,12 @@ small[class] {
 .bigDigits[class] {
   font-size: 3em;
   line-height: 1;
-  word-spacing: -0.5rem;
   padding: 0px;
 }
+.white .bigDigits[class] {
+  word-spacing: -0.5rem;
+}
+
 .progress-bar[class] {
   border-radius: 20px;
   background-color: #503aeb;

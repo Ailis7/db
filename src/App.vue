@@ -159,6 +159,7 @@ html {
 
   button.el-carousel__arrow[class] {
     display: inline-block;
+    position: fixed;
   }
 
   header.row.mainHeader[class] {

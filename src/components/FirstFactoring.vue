@@ -172,7 +172,7 @@ export default {
       this.$emit('arrowClick', 'next');
     },
     handleResize: function() {
-      this.resizeCount('mainContainer', 'headerProject', 'allDeal');
+      this.resizeCount('mainContainer', 'headerProject', 'allDeal', 'comissionStatistic');
     },
   },
   computed: {
